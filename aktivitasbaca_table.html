@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Aktivitas Baca Table</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>id_fact</th>
+                            <th>id_siswa</th>
+                            <th>id_buku</th>
+                            <th>tanggal_baca</th>
+                            <th>durasi_menit</th>
+                            <th>halaman_selesai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in activity %}
+                            <tr>
+                                <td>{{data.id_fact}}</td>
+                                <td>{{data.id_siswa}}</td>
+                                <td> {{data.id_buku}} </td>
+                                <td> {{data.tanggal_baca}} </td>
+                                <td> {{data.durasi_menit}} </td>
+                                <td> {{data.halaman_selesai}} </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+{% endblock %}
