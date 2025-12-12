@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="h3 mb-4 text-gray-800">Input Aktivitas Baca</h1>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Formulir Log Literasi</h6>
+    </div>
+    <div class="card-body">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('input_data') }}">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_siswa" class="form-label font-weight-bold">Nama Siswa</label>
+                    <select class="form-control" name="id_siswa" id="id_siswa" required>
+                        <option value="" selected disabled>-- Pilih Siswa --</option>
+                        {% for s in students %}
+                            <option value="{{ s.id_siswa }}">{{ s.nama_lengkap }} - {{ s.kelas }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="id_buku" class="form-label font-weight-bold">Judul Buku</label>
+                    <select class="form-control" name="id_buku" id="id_buku" required>
+                        <option value="" selected disabled>-- Pilih Buku --</option>
+                        {% for b in books %}
+                            <option value="{{ b.id_buku }}">{{ b.judul_buku }} ({{ b.kategori }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="tanggal_baca" class="form-label font-weight-bold">Tanggal Baca</label>
+                    <input type="date" class="form-control" name="tanggal_baca" id="tanggal_baca" required>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="durasi_menit" class="form-label font-weight-bold">Durasi (Menit)</label>
+                    <input type="number" class="form-control" name="durasi_menit" min="1" placeholder="Contoh: 30" required>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="halaman_selesai" class="form-label font-weight-bold">Halaman Terbaca</label>
+                    <input type="number" class="form-control" name="halaman_selesai" min="1" placeholder="Jml Halaman" required>
+                </div>
+            </div>
+
+            <hr>
+            <button type="submit" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-save"></i>
+                </span>
+                <span class="text">Simpan Data</span>
+            </button>
+            
+        </form>
+        </div>
+</div>
+
+{% endblock %}
